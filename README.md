@@ -3,7 +3,7 @@
 A component that provides drop animation. It could be used for bottom swipe action.
 
 <p>
-<img src="https://github.com/cr0manty/drop_slider/blob/main/screenshots/preview.gif />
+<img src="https://github.com/cr0manty/drop_slider/blob/master/screenshots/preview.gif"/>
 </p>
 
 ## How to use
