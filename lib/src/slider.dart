@@ -1,5 +1,3 @@
-// @dart=2.12
-
 import 'dart:async';
 
 import 'package:drop_slider/src/base/base_controller.dart';
