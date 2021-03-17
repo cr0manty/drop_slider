@@ -36,6 +36,9 @@ abstract class BaseDropSwipeController {
   /// Public access to animated height
   double get animateHeight => _animateHeight;
 
+  /// Public access to current position
+  double get currentPosition => position;
+
   /// Public access to minimal height to make action
   double get minHeight => _minHeight;
 
