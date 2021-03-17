@@ -1,0 +1,19 @@
+name: drop_slider
+description: Flutter package with beautiful drop slide animation with action on end height or spicified min height
+version: 0.1.0
+homepage: https://github.com/cr0manty/drop_slider
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+
