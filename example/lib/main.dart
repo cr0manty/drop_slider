@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Flutter Example',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Flutter Swipe Demo'),
     );
   }
 }
@@ -47,7 +47,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  DropSwipeController _controller = DropSwipeController(position: 100);
+  DropSwipeController _controller = DropSwipeController(position: 75);
 
   int _counter = 0;
 
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: MediaQuery.of(context).size.height * .3,
             ),
             Text(
-              'You have pushed the button this many times:',
+              'You have swiped this many times:',
             ),
             Text(
               '$_counter',
@@ -111,36 +111,22 @@ class _MyHomePageState extends State<MyHomePage> {
               controller: _controller,
               color: Colors.blue,
               onDragEnd: () {
-                showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                    clipBehavior: Clip.hardEdge,
-                    child: Container(
-                      height: 100,
-                      width: 100,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Text('Action Complete'),
-                    ),
-                  ),
-                );
+                _incrementCounter();
               },
               aboveWidget: (context, height) => Transform.translate(
                 offset: Offset(-1, height * .2 < 15 ? 15 : height * .2),
                 child: Icon(
                   Icons.arrow_drop_up_outlined,
-                  color: Colors.black,
+                  color: Colors.blue,
                   size: 50,
                 ),
               ),
               child: (context, height) => Padding(
                 padding: EdgeInsets.only(bottom: height * .2),
                 child: Icon(
-                  Icons.camera_alt,
-                  size: 22,
+                  Icons.plus_one,
+                  size: height * .2,
+                  color: Colors.white,
                 ),
               ),
             ),

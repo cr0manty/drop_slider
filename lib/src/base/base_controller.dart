@@ -4,7 +4,8 @@ import 'package:flutter/foundation.dart';
 
 abstract class BaseDropSwipeController {
   /// Initial position of drop swipe element
-  double _position;
+  @protected
+  double position;
 
   /// Reverse animate step
   double _animateHeight;
@@ -23,7 +24,7 @@ abstract class BaseDropSwipeController {
   /// initial switch widget position
   @mustCallSuper
   BaseDropSwipeController(
-    this._position,
+    this.position,
     this._animateHeight,
     this._reverseDuration,
     this._minHeight,
@@ -34,9 +35,6 @@ abstract class BaseDropSwipeController {
 
   /// Public access to animated height
   double get animateHeight => _animateHeight;
-
-  /// Public access to current position
-  double get position => _position;
 
   /// Public access to minimal height to make action
   double get minHeight => _minHeight;

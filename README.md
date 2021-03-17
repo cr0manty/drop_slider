@@ -3,7 +3,7 @@
 A component that provides drop animation. It could be used for bottom swipe action.
 
 <p>
-<img src="https://github.com/cr0manty/drop_slider/blob/master/screenshots/preview.gif"/>
+    <img src="screenshots/preview.gif" height="500px" width="300px">
 </p>
 
 ## How to use
@@ -33,8 +33,9 @@ triggered when the minimum height is reached or element tap
       child: (context, height) => Padding(
         padding: EdgeInsets.only(bottom: height * .2),
         child: Icon(
-          Icons.camera_alt,
-          size: 22,
+          Icons.plus_one,
+          size: height * .2,
+          color: Colors.white,
         ),
       ),
     ),
@@ -43,7 +44,7 @@ triggered when the minimum height is reached or element tap
 
 You can also configure the widget using a controller to toggle animation:
 ```dart
-  final _controller = DropSwipeController(position: 100);
+  final _controller = DropSwipeController(position: 75);
 
   ...
   DropSlider(
@@ -52,15 +53,16 @@ You can also configure the widget using a controller to toggle animation:
         offset: Offset(-1, height * .2 < 15 ? 15 : height * .2),
         child: Icon(
           Icons.arrow_drop_up_outlined,
-          color: Colors.black,
+          color: Colors.blue,
           size: 50,
         ),
       ),
       child: (context, height) => Padding(
         padding: EdgeInsets.only(bottom: height * .2),
         child: Icon(
-          Icons.camera_alt,
-          size: 22,
+          Icons.plus_one,
+          size: height * .2,
+          color: Colors.white,
         ),
       ),
     ),

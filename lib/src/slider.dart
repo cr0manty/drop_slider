@@ -54,7 +54,7 @@ class DropSlider extends StatefulWidget {
     this.maxHeight = 200,
     this.isOnTapEnabled = true,
     this.opacityDuration = const Duration(milliseconds: 300),
-    this.reverseDuration = const Duration(milliseconds: 200),
+    this.reverseDuration = const Duration(milliseconds: 20),
     Key? key,
   }) : super(key: key);
 
@@ -86,7 +86,10 @@ class _DropSliderState extends State<DropSlider> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? DropSwipeController();
+    _controller = widget.controller ??
+        DropSwipeController(
+          reverseDuration: widget.reverseDuration,
+        );
     _height = _controller!.position;
   }
 
@@ -114,11 +117,12 @@ class _DropSliderState extends State<DropSlider> {
         }
       },
       onVerticalDragEnd: (_) {
+        _controller!.reverse();
+
         if (_height >= _controller!.minHeight) {
           widget.onDragEnd?.call();
         }
         _height = 0;
-        _controller!.reverse();
       },
       child: Column(
         children: [

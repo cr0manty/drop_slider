@@ -21,15 +21,18 @@ class DropSwipeController extends BaseDropSwipeController {
 
   Stream<double> get stream => _dropSwipeController.stream;
 
-  void jumpTo(double position) => _dropSwipeController.sink.add(position);
+  void jumpTo(double position) {
+    this.position = position;
+    _dropSwipeController.sink.add(position);
+  }
 
   void animateTo(double position, {Duration? duration}) {
     _timer = Timer.periodic(duration ?? reverseDuration, (timer) {
-      if (position < animateHeight) {
+      if (this.position < animateHeight) {
         jumpTo(0);
         timer.cancel();
       } else {
-        jumpTo(position - animateHeight);
+        jumpTo(this.position - animateHeight);
       }
     });
   }
