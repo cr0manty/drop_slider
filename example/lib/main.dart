@@ -114,6 +114,18 @@ class _MyHomePageState extends State<MyHomePage> {
               onDragEnd: () {
                 _incrementCounter();
               },
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.amber,
+                  spreadRadius: 0.5,
+                  blurRadius: 2,
+                ),
+                BoxShadow(
+                  color: Colors.amber,
+                  spreadRadius: -0.5,
+                  blurRadius: 2,
+                ),
+              ],
               aboveWidget: (context, height) => Transform.translate(
                 offset: Offset(-1, height * .2 < 15 ? 15 : height * .2),
                 child: Icon(

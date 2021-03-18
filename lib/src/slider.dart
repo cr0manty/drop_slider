@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:drop_slider/src/base/base_controller.dart';
 import 'package:drop_slider/src/utils/clipper.dart';
 import 'package:drop_slider/src/controller.dart';
-import 'package:flutter/material.dart';
+import 'package:drop_slider/src/utils/painter.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 
@@ -30,16 +30,19 @@ typedef HeightBuilder = Widget Function(BuildContext context, double height);
 /// opacity change on swipe
 /// [isOnTapEnabled] - allows you to activate
 /// an action on clicking on an element
+/// [boxShadow] - used to display a shadow on an drop element
 
 @immutable
 class DropSlider extends StatefulWidget {
+  final HeightBuilder aboveWidget;
   final HeightBuilder child;
   final Color color;
-  final HeightBuilder aboveWidget;
+  final List<BoxShadow>? boxShadow;
   final double maxHeight;
   final BaseDropSwipeController? controller;
   final double? width;
   final VoidCallback? onDragEnd;
+  final VoidCallback? onDragStart;
   final Duration reverseDuration;
   final Duration opacityDuration;
   final bool isOnTapEnabled;
@@ -50,7 +53,9 @@ class DropSlider extends StatefulWidget {
     required this.aboveWidget,
     this.controller,
     this.onDragEnd,
+    this.onDragStart,
     this.width,
+    this.boxShadow,
     this.maxHeight = 200,
     this.isOnTapEnabled = true,
     this.opacityDuration = const Duration(milliseconds: 300),
@@ -102,10 +107,13 @@ class _DropSliderState extends State<DropSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final width = widget.width ?? MediaQuery.of(context).size.width;
+
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
-      onTap: widget.onDragEnd,
+      onTap: widget.isOnTapEnabled ? widget.onDragEnd : null,
       onVerticalDragUpdate: (details) {
+        widget.onDragStart?.call();
         _timer?.cancel();
 
         if (_height - details.delta.dy > 0) {
@@ -139,19 +147,25 @@ class _DropSliderState extends State<DropSlider> {
                   stream: _controller!.stream,
                   initialData: _height,
                   builder: (context, snapshot) {
-                    return ClipPath(
-                      clipper: DropClipper(
-                        height: snapshot.data!,
-                        width:
-                            widget.width ?? MediaQuery.of(context).size.width,
-                        minHeight: 0,
+                    final clipper = DropClipper(
+                      height: snapshot.data!,
+                      width: width,
+                      minHeight: 0,
+                    );
+
+                    return CustomPaint(
+                      painter: DropShadowPainter(
+                        clipper: clipper,
+                        clipShadow: widget.boxShadow,
                       ),
-                      child: Container(
-                        alignment: Alignment.topCenter,
-                        height: snapshot.data!,
-                        width:
-                            widget.width ?? MediaQuery.of(context).size.width,
-                        color: widget.color,
+                      child: ClipPath(
+                        clipper: clipper,
+                        child: Container(
+                          alignment: Alignment.topCenter,
+                          height: snapshot.data!,
+                          width: width,
+                          color: widget.color,
+                        ),
                       ),
                     );
                   }),

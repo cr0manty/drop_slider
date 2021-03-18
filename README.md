@@ -3,7 +3,7 @@
 A component that provides drop animation. It could be used for bottom swipe action.
 
 <p>
-    <img src="screenshots/preview.gif" height="500px" width="300px">
+    <img src="https://github.com/cr0manty/drop_slider/blob/master/screenshots/preview.gif" height="500px" width="300px">
 </p>
 
 ## How to use
@@ -57,6 +57,45 @@ You can also configure the widget using a controller to toggle animation:
           size: 50,
         ),
       ),
+      child: (context, height) => Padding(
+        padding: EdgeInsets.only(bottom: height * .2),
+        child: Icon(
+          Icons.plus_one,
+          size: height * .2,
+          color: Colors.white,
+        ),
+      ),
+    ),
+    ...
+```
+
+Use BoxShadow to display a shadow on an element
+```dart
+  final _controller = DropSwipeController(position: 75);
+
+  ...
+  DropSlider(
+      controller: _controller,
+      aboveWidget: (context, height) => Transform.translate(
+        offset: Offset(-1, height * .2 < 15 ? 15 : height * .2),
+        child: Icon(
+          Icons.arrow_drop_up_outlined,
+          color: Colors.blue,
+          size: 50,
+        ),
+      ),
+      boxShadow: const [
+          BoxShadow(
+            color: Colors.amber,
+            spreadRadius: 0.5,
+            blurRadius: 2,
+          ),
+          BoxShadow(
+            color: Colors.amber,
+            spreadRadius: -0.5,
+            blurRadius: 2,
+          ),
+        ],
       child: (context, height) => Padding(
         padding: EdgeInsets.only(bottom: height * .2),
         child: Icon(
