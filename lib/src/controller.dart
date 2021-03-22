@@ -5,16 +5,16 @@ import 'package:flutter/services.dart';
 
 class DropSwipeController extends BaseDropSwipeController {
   final _dropSwipeController = StreamController<double>.broadcast();
-  final HapticFeedbackType feedbackType;
   Timer? _timer;
 
   DropSwipeController({
-    this.feedbackType = HapticFeedbackType.selection,
+    HapticFeedbackType feedbackType = HapticFeedbackType.selection,
     double position = 0,
     double animateHeight = 50,
     double minimumHeight = 50,
     Duration reverseDuration = const Duration(milliseconds: 30),
   }) : super(
+          feedbackType,
           position,
           animateHeight,
           reverseDuration,
@@ -31,8 +31,8 @@ class DropSwipeController extends BaseDropSwipeController {
   void animateTo(double position, {Duration? duration}) {
     _timer = Timer.periodic(duration ?? reverseDuration, (timer) {
       if (this.position < animateHeight) {
-        HapticFeedback.heavyImpact();
         jumpTo(0);
+        createHapticFeedback();
         timer.cancel();
       } else {
         jumpTo(this.position - animateHeight);

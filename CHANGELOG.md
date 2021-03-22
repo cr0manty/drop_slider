@@ -1,3 +1,7 @@
+## [0.1.3]
+
+* added haptic feedback
+
 ## [0.1.2]
 
 * fix isOnTapEnabled

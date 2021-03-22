@@ -19,12 +19,17 @@ abstract class BaseDropSwipeController {
   /// to reduce drop swipe widget height
   Duration _reverseDuration;
 
+  /// Haptic feedback type
+  /// use default flutter impact [HapticFeedback]
+  final HapticFeedbackType feedbackType;
+
   /// base constructor to init
   /// reverse animation duration
   /// reverse animation height
   /// initial switch widget position
   @mustCallSuper
   BaseDropSwipeController(
+    this.feedbackType,
     this.position,
     this._animateHeight,
     this._reverseDuration,

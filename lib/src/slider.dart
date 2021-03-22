@@ -4,6 +4,7 @@ import 'package:drop_slider/src/base/base_controller.dart';
 import 'package:drop_slider/src/utils/clipper.dart';
 import 'package:drop_slider/src/controller.dart';
 import 'package:drop_slider/src/utils/painter.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 
@@ -118,6 +119,8 @@ class _DropSliderState extends State<DropSlider> {
 
         if (_height - details.delta.dy > 0) {
           _height -= details.delta.dy;
+        } else if (_controller!.feedbackType != HapticFeedbackType.none) {
+          HapticFeedback.selectionClick();
         }
 
         if (widget.maxHeight > _height) {
