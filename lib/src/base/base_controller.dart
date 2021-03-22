@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
+enum HapticFeedbackType { light, medium, heavy, selection, none }
+
 abstract class BaseDropSwipeController {
   /// Initial position of drop swipe element
-  @protected
   double position;
 
   /// Reverse animate step
@@ -53,6 +54,9 @@ abstract class BaseDropSwipeController {
 
   /// Swipe to position with Animation
   void animateTo(double position, {Duration duration});
+
+  /// Make haptic feedback based on the set type
+  void createHapticFeedback();
 
   /// must be called to close stream
   void dispose();

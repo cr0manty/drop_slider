@@ -154,7 +154,7 @@ class _DropSliderState extends State<DropSlider> {
                     );
 
                     return CustomPaint(
-                      painter: DropShadowPainter(
+                      painter: CoverShadowPainter(
                         clipper: clipper,
                         clipShadow: widget.boxShadow,
                       ),

@@ -1,13 +1,13 @@
 import 'package:flutter/rendering.dart';
 
-class DropShadowPainter extends CustomPainter {
+class CoverShadowPainter extends CustomPainter {
   /// If non-null, determines which clip to use.
   final CustomClipper<Path> clipper;
 
   /// A list of shadows cast by this box behind the box.
   final List<BoxShadow>? clipShadow;
 
-  DropShadowPainter({
+  CoverShadowPainter({
     required this.clipper,
     this.clipShadow,
   });
