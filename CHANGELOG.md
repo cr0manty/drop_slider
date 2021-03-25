@@ -1,3 +1,7 @@
+## [0.1.4]
+
+* fixes
+
 ## [0.1.3]
 
 * added haptic feedback

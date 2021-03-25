@@ -119,8 +119,6 @@ class _DropSliderState extends State<DropSlider> {
 
         if (_height - details.delta.dy > 0) {
           _height -= details.delta.dy;
-        } else if (_controller!.feedbackType != HapticFeedbackType.none) {
-          HapticFeedback.selectionClick();
         }
 
         if (widget.maxHeight > _height) {
@@ -131,6 +129,9 @@ class _DropSliderState extends State<DropSlider> {
         _controller!.reverse();
 
         if (_height >= _controller!.minHeight) {
+          if (_controller!.feedbackType != HapticFeedbackType.none) {
+            HapticFeedback.selectionClick();
+          }
           widget.onDragEnd?.call();
         }
         _height = 0;

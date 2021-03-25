@@ -9,15 +9,15 @@ abstract class BaseDropSwipeController {
   double position;
 
   /// Reverse animate step
-  double _animateHeight;
+  final double _animateHeight;
 
   /// The minimum height after which the swipe widget will appear
-  double _minHeight;
+  final double _minHeight;
 
   /// Reverse animation duration
   /// after this time timer will called
   /// to reduce drop swipe widget height
-  Duration _reverseDuration;
+  final Duration _reverseDuration;
 
   /// Haptic feedback type
   /// use default flutter impact [HapticFeedback]
