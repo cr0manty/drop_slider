@@ -8,7 +8,7 @@ class DropSwipeController extends BaseDropSwipeController {
   Timer? _timer;
 
   DropSwipeController({
-    HapticFeedbackType feedbackType = HapticFeedbackType.selection,
+    HapticFeedbackType feedbackType = HapticFeedbackType.light,
     double position = 0,
     double animateHeight = 50,
     double minimumHeight = 50,

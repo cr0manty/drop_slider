@@ -32,6 +32,7 @@ typedef HeightBuilder = Widget Function(BuildContext context, double height);
 /// [isOnTapEnabled] - allows you to activate
 /// an action on clicking on an element
 /// [boxShadow] - used to display a shadow on an drop element
+/// [feedbackType] - haptic feedback type
 
 @immutable
 class DropSlider extends StatefulWidget {
@@ -47,6 +48,7 @@ class DropSlider extends StatefulWidget {
   final Duration reverseDuration;
   final Duration opacityDuration;
   final bool isOnTapEnabled;
+  final HapticFeedbackType feedbackType;
 
   const DropSlider({
     required this.child,
@@ -59,6 +61,7 @@ class DropSlider extends StatefulWidget {
     this.boxShadow,
     this.maxHeight = 200,
     this.isOnTapEnabled = true,
+    this.feedbackType = HapticFeedbackType.light,
     this.opacityDuration = const Duration(milliseconds: 300),
     this.reverseDuration = const Duration(milliseconds: 20),
     Key? key,
@@ -95,6 +98,7 @@ class _DropSliderState extends State<DropSlider> {
     _controller = widget.controller ??
         DropSwipeController(
           reverseDuration: widget.reverseDuration,
+          feedbackType: widget.feedbackType,
         );
     _height = _controller!.position;
   }
