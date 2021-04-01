@@ -1,3 +1,8 @@
+## [0.1.6]
+
+* fixes
+
+
 ## [0.1.5]
 
 * added haptic feedback type on widget

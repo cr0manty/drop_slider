@@ -4,7 +4,6 @@ import 'package:drop_slider/src/base/base_controller.dart';
 import 'package:drop_slider/src/utils/clipper.dart';
 import 'package:drop_slider/src/controller.dart';
 import 'package:drop_slider/src/utils/painter.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/foundation.dart';
 
@@ -87,7 +86,7 @@ class DropSlider extends StatefulWidget {
 }
 
 class _DropSliderState extends State<DropSlider> {
-  late final BaseDropSwipeController? _controller;
+  late final BaseDropSwipeController _controller;
   late double _height;
 
   Timer? _timer;
@@ -100,12 +99,12 @@ class _DropSliderState extends State<DropSlider> {
           reverseDuration: widget.reverseDuration,
           feedbackType: widget.feedbackType,
         );
-    _height = _controller!.position;
+    _height = _controller.position;
   }
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     _timer?.cancel();
     super.dispose();
   }
@@ -126,16 +125,14 @@ class _DropSliderState extends State<DropSlider> {
         }
 
         if (widget.maxHeight > _height) {
-          _controller!.jumpTo(_height);
+          _controller.jumpTo(_height);
         }
       },
       onVerticalDragEnd: (_) {
-        _controller!.reverse();
+        _controller.reverse();
 
-        if (_height >= _controller!.minHeight) {
-          if (_controller!.feedbackType != HapticFeedbackType.none) {
-            HapticFeedback.selectionClick();
-          }
+        if (_height >= _controller.minHeight) {
+          _controller.createHapticFeedback();
           widget.onDragEnd?.call();
         }
         _height = 0;
@@ -143,7 +140,7 @@ class _DropSliderState extends State<DropSlider> {
       child: Column(
         children: [
           StreamBuilder<double>(
-            stream: _controller!.stream,
+            stream: _controller.stream,
             initialData: _height,
             builder: (context, snapshot) =>
                 widget.aboveWidget(context, snapshot.data!),
@@ -152,7 +149,7 @@ class _DropSliderState extends State<DropSlider> {
             alignment: Alignment.bottomCenter,
             children: [
               StreamBuilder<double>(
-                  stream: _controller!.stream,
+                  stream: _controller.stream,
                   initialData: _height,
                   builder: (context, snapshot) {
                     final clipper = DropClipper(
@@ -178,10 +175,10 @@ class _DropSliderState extends State<DropSlider> {
                     );
                   }),
               StreamBuilder<double>(
-                stream: _controller!.stream,
+                stream: _controller.stream,
                 initialData: _height,
                 builder: (context, snapshot) => AnimatedOpacity(
-                  opacity: snapshot.data! > _controller!.minHeight ? 1 : 0,
+                  opacity: snapshot.data! > _controller.minHeight ? 1 : 0,
                   duration: widget.opacityDuration,
                   child: widget.child(context, snapshot.data!),
                 ),
