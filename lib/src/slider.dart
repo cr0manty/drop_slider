@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:drop_slider/src/base/base_controller.dart';
+import 'package:drop_slider/src/base/constants.dart';
 import 'package:drop_slider/src/utils/clipper.dart';
 import 'package:drop_slider/src/controller.dart';
 import 'package:drop_slider/src/utils/painter.dart';

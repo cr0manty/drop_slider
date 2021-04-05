@@ -1,8 +1,7 @@
 import 'dart:async';
 
+import 'package:drop_slider/src/base/constants.dart';
 import 'package:flutter/foundation.dart';
-
-enum HapticFeedbackType { light, medium, heavy, selection, none }
 
 abstract class BaseDropSwipeController {
   /// Initial position of drop swipe element

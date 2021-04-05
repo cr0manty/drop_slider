@@ -1,7 +1,10 @@
+## [0.1.7]
+
+* separate constants from base controller
+
 ## [0.1.6]
 
 * fixes
-
 
 ## [0.1.5]
 
